@@ -1,20 +1,40 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 
 class App extends Component {
+
+  constructor() {
+    super()
+    this.state = {
+      data: [],
+    }
+  }
+  componentDidMount() {
+    return fetch('https://github.com/CoderCampsSeattleJava')
+      .then((response) => response.json())
+      .then((responseJson) => {
+       
+        this.setState({
+          data:[]
+        })
+        console.log(this.state.data)
+      })
+    }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        {
+          this.state.data.map( (dynamicData,key)=>
+          <div>
+            {
+              dynamicData.title
+            }
+            </div>
+
+          )
+        }
+
       </div>
-    );
+    )
   }
 }
 
